@@ -6,46 +6,31 @@ import java.util.Objects;
 
 public class Turma {
 
+    private Integer turmaId;
     private String ano;
-
-    //depois vai ser injetado pelo spring
-    private List<String> alunos = new ArrayList<>(0);
-
     private String mentor;
 
-    public String getMentor() {
-        return mentor;
-    }
 
-    public void setMentor(String mentor) {
+    public Turma (){}
+
+    public Turma(String ano,  String mentor) {
+        this.ano = ano;
         this.mentor = mentor;
     }
 
-    public Turma(String ano, List<String> alunos, String mentor) {
-        this.ano = ano;
-        this.alunos = alunos;
-        this.mentor = mentor;
-    }
+    public Integer getTumaid() {return turmaId;}
 
-    public String getAno() {
-        return ano;
-    }
+    public String getAno() {return ano;}
 
-    public void setAno(String ano) {
-        this.ano = ano;
-    }
+    public void setAno(String ano) {this.ano = ano;}
 
-    public List<String> getAlunos() {
-        return alunos;
-    }
+    public String getMentor() {return mentor;}
 
-    public void setAlunos(List<String> alunos) {
-        this.alunos = alunos;
-    }
+    public void setMentor(String mentor) { this.mentor = mentor;}
 
     @Override
     public String toString() {
-        return "Turma: " + ano;
+        return "Turma: " + ano + " mentor: "+mentor;
     }
 
     @Override
@@ -53,11 +38,11 @@ public class Turma {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Turma turma = (Turma) o;
-        return Objects.equals(ano, turma.ano) && Objects.equals(alunos, turma.alunos);
+        return Objects.equals(ano, turma.ano) && Objects.equals(mentor, turma.mentor);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ano, alunos);
+        return Objects.hash(ano, mentor);
     }
 }

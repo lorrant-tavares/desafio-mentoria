@@ -23,7 +23,7 @@ public class TurmaController {
 
     @PostMapping
     public void postTurma (@RequestBody Turma turma){
-        turmaService.postTurma();
+        turmaService.postTurma(turma);
     }
 
     @DeleteMapping(value = "{id}")

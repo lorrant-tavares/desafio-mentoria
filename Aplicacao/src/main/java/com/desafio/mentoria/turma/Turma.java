@@ -18,7 +18,7 @@ public class Turma {
         this.mentor = mentor;
     }
 
-    public Integer getTumaid() {return turmaId;}
+    public Integer getTurmaId() {return turmaId;}
 
     public String getAno() {return ano;}
 

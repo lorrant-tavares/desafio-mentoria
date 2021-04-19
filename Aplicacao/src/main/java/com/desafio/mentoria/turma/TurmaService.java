@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -38,12 +37,15 @@ public class TurmaService {
     public void updateTurma(Integer id, Turma turma) {
         Turma turmaEncontrada =  turmaRepository
                 .findById(id).orElseThrow(() -> new RuntimeException("Turma não encontrada: "+id));
+
         if(campoValido(turma.getAno(), turmaEncontrada.getAno()))
             turmaEncontrada.setAno(turma.getAno());
+
         if(campoValido(turma.getMentor(), turmaEncontrada.getMentor()))
             turmaEncontrada.setMentor(turma.getMentor());
     }
     private boolean campoValido(String campoNovo, String campoEncontrado){
-        return campoNovo.length() > 0 && !Objects.equals(campoEncontrado, campoNovo);
+       return true;
+        // return StringUtils. campoNovo.isEmpty() && !Objects.equals(campoEncontrado, campoNovo);
     }
 }

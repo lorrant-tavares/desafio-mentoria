@@ -18,7 +18,7 @@ public class TurmaController {
     @GetMapping
     public List<Turma> getTurmas (){return turmaService.getTurmas();}
 
-    @GetMapping(value = "{id}")
+    @GetMapping(value = "/{id}")
     public Turma getTurma (@PathVariable("id") Integer id){return turmaService.getTurma(id);}
 
     @PostMapping
@@ -26,10 +26,10 @@ public class TurmaController {
         turmaService.postTurma(turma);
     }
 
-    @DeleteMapping(value = "{id}")
+    @DeleteMapping(value = "/{id}")
     public void deleteTurma(@PathVariable("id") Integer id ){turmaService.deleteTurma(id);}
 
-    @PutMapping(value = "{id}")
+    @PutMapping(value = "/{id}")
     public void updateTurma(@PathVariable("id") Integer id,
                             @RequestBody Turma turma)
     {turmaService.updateTurma(id, turma);}

@@ -1,13 +1,23 @@
 package com.desafio.mentoria.turma;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Turma {
 
+@Entity
+@Table
+public class Turma {
+    @Id
+    @Column(name = "turma_id")
     private Integer turmaId;
+    @Column(nullable = false)
     private String ano;
+    @Column(nullable = false)
     private String mentor;
 
 

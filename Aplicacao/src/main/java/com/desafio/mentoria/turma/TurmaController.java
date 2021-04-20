@@ -25,7 +25,7 @@ public class TurmaController {
 
     @PostMapping
     public ResponseEntity<Turma> postTurma (@RequestBody TurmaDTO turmaDTO){
-        Turma turma = turmaService.postTurma(turmaDTO.transformaParaObjeto());
+        Turma turma = turmaService.postTurma(turmaDTO.toObject());
         return new ResponseEntity<>(turma, HttpStatus.CREATED);
     }
 

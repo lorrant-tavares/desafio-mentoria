@@ -7,7 +7,7 @@ public class TurmaDTO {
     private String ano;
     private String mentorId;
 
-    public Turma transformaParaObjeto(){
+    public Turma toObject(){
         return new Turma(ano, mentorId);
     }
 

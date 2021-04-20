@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -29,6 +30,7 @@ public class TurmaService {
         turmaRepository.deleteById(id);
     }
 
+    @Transactional
     public void updateTurma(Integer id, Turma turma) {
         Turma turmaEncontrada =  turmaRepository
                 .findById(id).orElseThrow(() -> new RuntimeException("Turma não encontrada: "+id));
@@ -44,6 +46,7 @@ public class TurmaService {
     }
 
     private boolean campoValido(String campoNovo, String campoEncontrado){
-       return StringUtils.isEmpty(campoNovo) && !StringUtils.equals(campoNovo, campoEncontrado);
+        return true;
+        //return StringUtils.isEmpty(campoNovo) && !StringUtils.equals(campoNovo, campoEncontrado);
     }
 }

@@ -9,7 +9,7 @@ import java.util.Objects;
 
 
 @Entity
-@Table
+@Table(name = "turmas")
 @Getter @Setter @NoArgsConstructor
 public class Turma {
     @Id
@@ -20,7 +20,7 @@ public class Turma {
     @Column(nullable = false)
     private String ano;
 
-    @Column(nullable = false)
+    @Column(name = "mentor_id", nullable = false)
     private String mentorId;
 
     public Turma(String ano, String mentorId) {

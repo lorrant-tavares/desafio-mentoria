@@ -22,14 +22,7 @@ public class TurmaService {
                     .findById(id)
                     .orElseThrow(() -> new RuntimeException("Turma não encontrada: "+id));}
 
-    public void postTurma(Turma turma) {
-      turmaRepository.save(turma);
-       /* Optional<Turma> turmaOptional = turmaRepository.findById(turma.getTurmaId());
-        turmaOptional.ifPresentOrElse(
-                (turmaEncontrada) -> {
-                    throw new RuntimeException("Turma já cadastrada"+turmaEncontrada.getTurmaId());},
-                () -> turmaRepository.save(turma));*/
-    }
+    public Turma postTurma(Turma turma) { return turmaRepository.save(turma); }
 
     public void deleteTurma(Integer id) {
         if(!turmaRepository.existsById(id)){throw new IllegalArgumentException("Turma Inexistente");}
@@ -45,6 +38,7 @@ public class TurmaService {
     private void updateSeValido(Turma turma, Turma turmaEncontrada) {
         if(campoValido(turma.getAno(), turmaEncontrada.getAno()))
             turmaEncontrada.setAno(turma.getAno());
+
         if(campoValido(turma.getMentorId(), turmaEncontrada.getMentorId()))
             turmaEncontrada.setMentorId(turma.getMentorId());
     }

@@ -1,6 +1,8 @@
 package com.desafio.mentoria.turma;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,8 +24,9 @@ public class TurmaController {
     public Turma getTurma (@PathVariable("id") Integer id){return turmaService.getTurma(id);}
 
     @PostMapping
-    public void postTurma (@RequestBody Turma turma){
-        turmaService.postTurma(turma);
+    public ResponseEntity<Turma> postTurma (@RequestBody TurmaDTO turmaDTO){
+        Turma turma = turmaService.postTurma(turmaDTO.transformaParaObjeto());
+        return new ResponseEntity<>(turma, HttpStatus.CREATED);
     }
 
     @DeleteMapping(value = "/{id}")

@@ -1,10 +1,11 @@
 package com.desafio.mentoria.turma;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TurmaService {
@@ -22,11 +23,12 @@ public class TurmaService {
                     .orElseThrow(() -> new RuntimeException("Turma não encontrada: "+id));}
 
     public void postTurma(Turma turma) {
-        Optional<Turma> turmaOptional = turmaRepository.findById(turma.getTurmaId());
+      turmaRepository.save(turma);
+       /* Optional<Turma> turmaOptional = turmaRepository.findById(turma.getTurmaId());
         turmaOptional.ifPresentOrElse(
                 (turmaEncontrada) -> {
                     throw new RuntimeException("Turma já cadastrada"+turmaEncontrada.getTurmaId());},
-                () -> turmaRepository.save(turma));
+                () -> turmaRepository.save(turma));*/
     }
 
     public void deleteTurma(Integer id) {
@@ -37,15 +39,17 @@ public class TurmaService {
     public void updateTurma(Integer id, Turma turma) {
         Turma turmaEncontrada =  turmaRepository
                 .findById(id).orElseThrow(() -> new RuntimeException("Turma não encontrada: "+id));
+        updateSeValido(turma, turmaEncontrada);
+    }
 
+    private void updateSeValido(Turma turma, Turma turmaEncontrada) {
         if(campoValido(turma.getAno(), turmaEncontrada.getAno()))
             turmaEncontrada.setAno(turma.getAno());
-
-        if(campoValido(turma.getMentor(), turmaEncontrada.getMentor()))
-            turmaEncontrada.setMentor(turma.getMentor());
+        if(campoValido(turma.getMentorId(), turmaEncontrada.getMentorId()))
+            turmaEncontrada.setMentorId(turma.getMentorId());
     }
+
     private boolean campoValido(String campoNovo, String campoEncontrado){
-       return true;
-        // return StringUtils. campoNovo.isEmpty() && !Objects.equals(campoEncontrado, campoNovo);
+       return StringUtils.isEmpty(campoNovo) && !StringUtils.equals(campoNovo, campoEncontrado);
     }
 }

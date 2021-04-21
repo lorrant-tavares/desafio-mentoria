@@ -1,63 +1,30 @@
 package com.desafio.mentoria.turma;
 
-import java.util.ArrayList;
-import java.util.List;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.*;
 import java.util.Objects;
 
-public class Turma {
 
+@Entity
+@Table(name = "turmas")
+@Getter @Setter @NoArgsConstructor
+public class Turma {
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "turma_id", updatable = false)
+    private Integer turmaId;
+
+    @Column(nullable = false)
     private String ano;
 
-    //depois vai ser injetado pelo spring
-    private List<String> alunos = new ArrayList<>(0);
+    @Column(name = "mentor_id", nullable = false)
+    private String mentorId;
 
-    private String mentor;
-
-    public String getMentor() {
-        return mentor;
-    }
-
-    public void setMentor(String mentor) {
-        this.mentor = mentor;
-    }
-
-    public Turma(String ano, List<String> alunos, String mentor) {
+    public Turma(String ano, String mentorId) {
         this.ano = ano;
-        this.alunos = alunos;
-        this.mentor = mentor;
-    }
-
-    public String getAno() {
-        return ano;
-    }
-
-    public void setAno(String ano) {
-        this.ano = ano;
-    }
-
-    public List<String> getAlunos() {
-        return alunos;
-    }
-
-    public void setAlunos(List<String> alunos) {
-        this.alunos = alunos;
-    }
-
-    @Override
-    public String toString() {
-        return "Turma: " + ano;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Turma turma = (Turma) o;
-        return Objects.equals(ano, turma.ano) && Objects.equals(alunos, turma.alunos);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(ano, alunos);
+        this.mentorId = mentorId;
     }
 }

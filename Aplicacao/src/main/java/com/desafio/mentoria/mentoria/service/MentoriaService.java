@@ -1,7 +1,7 @@
 package com.desafio.mentoria.mentoria.service;
 
 import com.desafio.mentoria.exception.ResourceNotFoundException;
-import com.desafio.mentoria.mentoria.Mentoria;
+import com.desafio.mentoria.mentoria.model.Mentoria;
 import com.desafio.mentoria.mentoria.repository.MentoriaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

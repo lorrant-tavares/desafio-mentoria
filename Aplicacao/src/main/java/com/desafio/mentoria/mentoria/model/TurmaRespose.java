@@ -1,4 +1,4 @@
-package com.desafio.mentoria.turma;
+package com.desafio.mentoria.mentoria.model;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -6,14 +6,14 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor(access =  AccessLevel.PRIVATE)
-public class TurmaResposeDTO {
+public class TurmaRespose {
 
     private Integer turmaId;
     private String ano;
     private String mentorId;
 
-    public static TurmaResposeDTO toDTO (Turma turma){
-        return new TurmaResposeDTO(turma.getTurmaId(),turma.getAno(),turma.getMentorId());
+    public static TurmaRespose toDTO (Turma turma){
+        return new TurmaRespose(turma.getTurmaId(),turma.getAno(),turma.getMentorId());
     }
 
 

@@ -1,9 +1,9 @@
-package com.desafio.mentoria.turma;
+package com.desafio.mentoria.mentoria.model;
 
 import lombok.Getter;
 
 @Getter
-public class TurmaDTO {
+public class TurmaRequest {
     private String ano;
     private String mentorId;
 

@@ -1,5 +1,8 @@
-package com.desafio.mentoria.turma;
+package com.desafio.mentoria.mentoria.service;
 
+import com.desafio.mentoria.mentoria.model.Turma;
+import com.desafio.mentoria.mentoria.model.TurmaRespose;
+import com.desafio.mentoria.mentoria.repository.TurmaRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,19 +20,19 @@ public class TurmaService {
     @Autowired
     public TurmaService (TurmaRepository turmaRepository){this.turmaRepository = turmaRepository;}
 
-    public List<TurmaResposeDTO> getTurmas() {
+    public List<TurmaRespose> getTurmas() {
          return turmaRepository
                  .findAll()
                  .stream()
-                 .map( turma -> TurmaResposeDTO.toDTO(turma))
+                 .map( turma -> TurmaRespose.toDTO(turma))
                  .collect(Collectors.toList());
     }
 
-    public TurmaResposeDTO getTurma(int id) {
+    public TurmaRespose getTurma(int id) {
         Turma turma = turmaRepository
                     .findById(id)
                     .orElseThrow(() -> new RuntimeException("Turma não encontrada: "+id));
-        return TurmaResposeDTO.toDTO(turma);
+        return TurmaRespose.toDTO(turma);
     }
 
     public Turma postTurma(Turma turma) { return turmaRepository.save(turma); }

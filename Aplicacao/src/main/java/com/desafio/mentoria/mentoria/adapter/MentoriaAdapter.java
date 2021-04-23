@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class MentoriaAdapter {
@@ -26,6 +28,12 @@ public class MentoriaAdapter {
         mentoriaResponse.setAtualizadoEm(mentoria.getAtualizadoEm().format(dateTimeFormatter));
 
         return mentoriaResponse;
+    }
+
+    public List<MentoriaResponse> mentoriaToMentoriaResponse(final List<Mentoria> mentorias){
+        return mentorias.stream()
+                .map(this::mentoriaToMentoriaResponse)
+                .collect(Collectors.toList());
     }
 
     public Mentoria mentoriaRequestToMentoria(final MentoriaRequest mentoriaRequest){

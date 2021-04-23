@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TurmaService {
@@ -16,12 +17,20 @@ public class TurmaService {
     @Autowired
     public TurmaService (TurmaRepository turmaRepository){this.turmaRepository = turmaRepository;}
 
-    public List<Turma> getTurmas() { return turmaRepository.findAll();}
+    public List<TurmaResposeDTO> getTurmas() {
+         return turmaRepository
+                 .findAll()
+                 .stream()
+                 .map( turma -> TurmaResposeDTO.toDTO(turma))
+                 .collect(Collectors.toList());
+    }
 
-    public Turma getTurma(int id) {
-        return turmaRepository
+    public TurmaResposeDTO getTurma(int id) {
+        Turma turma = turmaRepository
                     .findById(id)
-                    .orElseThrow(() -> new RuntimeException("Turma não encontrada: "+id));}
+                    .orElseThrow(() -> new RuntimeException("Turma não encontrada: "+id));
+        return TurmaResposeDTO.toDTO(turma);
+    }
 
     public Turma postTurma(Turma turma) { return turmaRepository.save(turma); }
 

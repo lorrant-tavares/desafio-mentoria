@@ -2,7 +2,7 @@ package com.desafio.mentoria.mentoria.controller;
 
 import com.desafio.mentoria.mentoria.model.Turma;
 import com.desafio.mentoria.mentoria.model.TurmaRequest;
-import com.desafio.mentoria.mentoria.model.TurmaRespose;
+import com.desafio.mentoria.mentoria.model.TurmaResponse;
 import com.desafio.mentoria.mentoria.service.TurmaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,25 +22,25 @@ public class TurmaController {
     public TurmaController (TurmaService turmaService){this.turmaService = turmaService;}
 
     @GetMapping
-    public List<TurmaRespose> getTurmas (){return turmaService.getTurmas();}
+    public List<TurmaResponse> getTurmas (){return turmaService.getTurmas();}
 
     @GetMapping(value = "/{id}")
-    public TurmaRespose getTurma (@PathVariable("id") Integer id){return turmaService.getTurma(id);}
+    public TurmaResponse getTurma (@PathVariable("id") Integer id){return turmaService.getTurma(id);}
 
     @PostMapping
-    public ResponseEntity<TurmaRespose> postTurma (@RequestBody TurmaRequest turmaRequest){
-        Turma turma = turmaService.postTurma(turmaRequest.toObject());
-        return new ResponseEntity<>(TurmaRespose.toDTO(turma), HttpStatus.CREATED);
+    public ResponseEntity<TurmaResponse> postTurma (@RequestBody TurmaRequest turmaRequest){
+        TurmaResponse turmaResponse = turmaService.postTurma(turmaRequest);
+        return new ResponseEntity<>(turmaResponse, HttpStatus.CREATED);
     }
 
     @DeleteMapping(value = "/{id}")
     public void deleteTurma(@PathVariable("id") Integer id ){turmaService.deleteTurma(id);}
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<TurmaRespose> updateTurma(@PathVariable("id") Integer id,
-                                                       @RequestBody Turma turma){
+    public ResponseEntity<TurmaResponse> updateTurma(@PathVariable("id") Integer id,
+                                                     @RequestBody Turma turma){
         turmaService.updateTurma(id, turma);
-        TurmaRespose turmaResponse = turmaService.getTurma(id);
+        TurmaResponse turmaResponse = turmaService.getTurma(id);
         return new ResponseEntity<>(turmaResponse, HttpStatus.ACCEPTED);
     }
 

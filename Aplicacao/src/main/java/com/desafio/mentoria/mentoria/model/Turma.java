@@ -1,4 +1,4 @@
-package com.desafio.mentoria.turma;
+package com.desafio.mentoria.mentoria.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
